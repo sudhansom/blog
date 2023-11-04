@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { BlogRaw } from 'src/app/models/blog.model';
 import { BlogService } from 'src/app/services/blog.service';
 
@@ -21,11 +21,13 @@ export class BlogCreateComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private blogService: BlogService
+    private blogService: BlogService,
+    private router: Router
   ) {}
   post?: BlogRaw;
   submit = true;
   title = '';
+  routes?: Route;
 
   ngOnInit(): void {
     let id = +this.route?.snapshot?.params['id'];
@@ -45,6 +47,8 @@ export class BlogCreateComponent implements OnInit {
   }
 
   submitForm() {
-    this.blogService.createPost(this.myForm.value).subscribe(console.log);
+    this.blogService.createPost(this.myForm.value).subscribe((res) => {
+      this.router?.navigate(['/']);
+    });
   }
 }

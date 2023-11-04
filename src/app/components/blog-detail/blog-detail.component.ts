@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BlogRaw } from 'src/app/models/blog.model';
 import { BlogService } from 'src/app/services/blog.service';
 
@@ -11,7 +11,8 @@ import { BlogService } from 'src/app/services/blog.service';
 export class BlogDetailComponent implements OnInit {
   constructor(
     private blogService: BlogService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
   post?: BlogRaw;
   id = 0;
@@ -24,6 +25,8 @@ export class BlogDetailComponent implements OnInit {
   }
 
   deletePost() {
-    this.blogService.deletePost(this.id).subscribe();
+    this.blogService.deletePost(this.id).subscribe((item) => {
+      this.router.navigate(['/']);
+    });
   }
 }
