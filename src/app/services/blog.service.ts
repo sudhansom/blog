@@ -15,4 +15,13 @@ export class BlogService {
   getAllPosts(): Observable<BlogRaw> {
     return this._http.get<BlogRaw>(this.apiUrl);
   }
+  getOnePost(id: number) {
+    return this._http.get<BlogRaw>(`${this.apiUrl}/${id}`);
+  }
+  createPost(post: BlogRaw) {
+    return this._http.post<BlogRaw>(this.apiUrl, post);
+  }
+  deletePost(id: number) {
+    return this._http.delete<BlogRaw>(this.apiUrl + `/${id}`);
+  }
 }

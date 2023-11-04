@@ -35,11 +35,21 @@
           line-height: 36px;
           font-weight: bold;
           margin-block: 0 var(--gap-space);
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .content {
           font-size: 22px;
           line-height: 26px;
           margin-block: 0;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }

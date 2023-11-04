@@ -3,8 +3,8 @@
   <ul class="all-posts" *ngIf="allPosts$ | async as allPosts">
     <li
       class="all-posts__post"
-      *ngFor="let post of allPosts"
-      routerLink="/create"
+      *ngFor="let post of allPosts; let i = index"
+      routerLink="{{ '/detail/' + post.id }}"
     >
       <p class="header">{{ post.title }}</p>
       <p class="content">{{ post.content }}</p>

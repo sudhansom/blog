@@ -1,0 +1,35 @@
+:host {
+  .container {
+    max-width: 700px;
+    margin: auto;
+    .post {
+      .title {
+        text-align: center;
+        font-size: 24px;
+      }
+      .content {
+        font-size: 18px;
+        line-height: 20px;
+      }
+      .author {
+        font-style: italic;
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      a {
+        display: inline-block;
+        border: 1px solid gray;
+        padding: 5px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.4s ease-in-out;
+        &:hover {
+          background-color: rgb(202, 198, 198);
+        }
+      }
+    }
+  }
+}

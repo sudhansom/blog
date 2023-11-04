@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
@@ -14,10 +16,21 @@ const appRoutes: Routes = [
     path: '',
     component: BlogListComponent,
   },
-
   {
     path: 'create',
     component: BlogCreateComponent,
+  },
+  {
+    path: 'create/:id',
+    component: BlogCreateComponent,
+  },
+  {
+    path: 'detail/:id',
+    component: BlogDetailComponent,
+  },
+  {
+    path: 'edit',
+    component: BlogEditComponent,
   },
 ];
 
@@ -29,7 +42,13 @@ const appRoutes: Routes = [
     BlogCreateComponent,
     BlogEditComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, RouterModule.forRoot(appRoutes)],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule,
+    FormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

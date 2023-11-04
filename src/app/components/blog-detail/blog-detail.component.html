@@ -1,1 +1,11 @@
-<p>blog-detail works!</p>
+<div class="container">
+  <div class="post">
+    <p class="title">{{ post?.title }}</p>
+    <p class="content">{{ post?.content }}</p>
+    <p class="author">{{ post?.author }}</p>
+  </div>
+  <div class="actions">
+    <button (click)="deletePost()">Delete</button>
+    <a routerLink="{{ '/create/' + post?.id }}">Edit</a>
+  </div>
+</div>

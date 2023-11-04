@@ -1,24 +1,26 @@
 <div class="container">
-  <form>
+  <h1>Create a new Post</h1>
+  <form [formGroup]="myForm" (ngSubmit)="submitForm()">
     <label
       >Id:
-      <input type="number" />
+      <input value="99" formControlName="id" type="number" />
     </label>
     <label
       >Title:
-      <input type="text" />
+      <input formControlName="title" type="text" />
     </label>
     <label
       >Author:
-      <input type="text" />
+      <input formControlName="author" type="text" />
     </label>
     <label
       >Content:
-      <textarea name="" id="" rows="5"></textarea>
+      <textarea formControlName="content" id="" rows="5"></textarea>
     </label>
     <label
       >Date:
-      <input type="date" />
+      <input formControlName="date" type="date" />
     </label>
+    <button type="submit">{{ submit ? "Submit" : "Edit" }}</button>
   </form>
 </div>
