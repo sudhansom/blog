@@ -16,7 +16,7 @@ export class BlogCreateComponent implements OnInit {
     title: new FormControl(null, Validators.required),
     author: new FormControl(null, Validators.required),
     content: new FormControl(null, Validators.required),
-    date: new FormControl(new Date()),
+    date: new FormControl(new Date(), Validators.required),
   });
 
   constructor(
@@ -28,27 +28,34 @@ export class BlogCreateComponent implements OnInit {
   submit = true;
   title = '';
   routes?: Route;
+  id = 0;
 
   ngOnInit(): void {
-    let id = +this.route?.snapshot?.params['id'];
+    this.id = +this.route?.snapshot?.params['id'];
     console.log(this.myForm.value);
-    if (id) {
+    if (this.id) {
       this.submit = false;
-      this.blogService.getOnePost(id).subscribe((item) => {
-        this.post = item;
-        this.myForm.value.id = this.post?.id;
-        this.myForm.value.title = this.post?.title;
-        this.myForm.value.author = this.post?.author;
-        this.myForm.value.content = this.post?.content;
-        this.myForm.value.date = this.post?.date;
-        this.title = this.myForm.value.title;
+      this.blogService.getOnePost(this.id).subscribe((item) => {
+        this.myForm.patchValue({
+          id: item.id,
+          title: item.title,
+          author: item.author,
+          content: item.content,
+          date: item.date,
+        });
       });
     }
   }
 
   submitForm() {
-    this.blogService.createPost(this.myForm.value).subscribe((res) => {
-      this.router?.navigate(['/']);
-    });
+    if (this.submit) {
+      this.blogService.createPost(this.myForm.value).subscribe((res) => {
+        this.router?.navigate(['/']);
+      });
+    } else {
+      this.blogService.editPost(this.myForm.value, this.id).subscribe((res) => {
+        this.router?.navigate(['/']);
+      });
+    }
   }
 }

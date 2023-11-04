@@ -24,4 +24,7 @@ export class BlogService {
   deletePost(id: number) {
     return this._http.delete<BlogRaw>(this.apiUrl + `/${id}`);
   }
+  editPost(post: BlogRaw, id: number) {
+    return this._http.put<BlogRaw>(this.apiUrl + `/${id}`, post);
+  }
 }

@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Create a new Post</h1>
+  <h1>{{ submit ? "Create a new Post" : "Edit Existing Post" }}</h1>
   <form [formGroup]="myForm" (ngSubmit)="submitForm()">
     <label
       >Id:
@@ -21,6 +21,8 @@
       >Date:
       <input formControlName="date" type="date" />
     </label>
-    <button type="submit">{{ submit ? "Submit" : "Edit" }}</button>
+    <button [disabled]="!myForm.valid" type="submit">
+      {{ submit ? "Submit" : "Edit" }}
+    </button>
   </form>
 </div>
