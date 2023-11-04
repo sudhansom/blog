@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from './services/blog.service';
-import { Observable } from 'rxjs';
+import { Observable, map, shareReplay } from 'rxjs';
+
+import { BlogRaw } from './models/blog.model';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +11,15 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   title = 'blog';
-  allPosts = this.blogService.getAllPosts();
+  allPosts$: Observable<BlogRaw[]> = this.blogService.getAllPosts().pipe(
+    map((item) => Object.values(item)),
+    shareReplay()
+  );
   constructor(private blogService: BlogService) {}
 
   ngOnInit(): void {
-    this.allPosts = this.blogService.getAllPosts();
-    this.allPosts.subscribe((post) => {
-      console.log('postId:', post?.id);
+    this.allPosts$.subscribe((posts) => {
+      console.log(posts);
     });
   }
 }
