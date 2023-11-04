@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { BlogService } from 'src/app/services/blog.service';
+import { Observable, map, shareReplay } from 'rxjs';
+
 import { BlogRaw } from 'src/app/models/blog.model';
 
 @Component({
@@ -8,9 +10,16 @@ import { BlogRaw } from 'src/app/models/blog.model';
   styleUrls: ['./blog-list.component.scss'],
 })
 export class BlogListComponent implements OnInit {
-  @Input() allPosts$ = new Observable<BlogRaw[]>();
+  title = 'blog';
+  allPosts$: Observable<BlogRaw[]> = this.blogService.getAllPosts().pipe(
+    map((item) => Object.values(item)),
+    shareReplay()
+  );
+  constructor(private blogService: BlogService) {}
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.allPosts$.subscribe((posts) => {
+      console.log(posts);
+    });
+  }
 }
