@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
@@ -13,12 +14,10 @@ import { BlogEditComponent } from './components/blog-edit/blog-edit.component';
     BlogListComponent,
     BlogDetailComponent,
     BlogCreateComponent,
-    BlogEditComponent
+    BlogEditComponent,
   ],
-  imports: [
-    BrowserModule
-  ],
+  imports: [BrowserModule, HttpClientModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
