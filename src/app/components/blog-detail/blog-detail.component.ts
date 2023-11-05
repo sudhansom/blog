@@ -15,10 +15,10 @@ export class BlogDetailComponent implements OnInit {
     private router: Router
   ) {}
   post?: BlogRaw;
-  id = 0;
+  id = '';
 
   ngOnInit(): void {
-    this.id = +this.route.snapshot.params['id'];
+    this.id = this.route.snapshot.params['id'];
     this.blogService.getOnePost(this.id).subscribe((item) => {
       this.post = item;
     });

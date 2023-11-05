@@ -12,7 +12,6 @@ import { BlogService } from 'src/app/services/blog.service';
 })
 export class BlogCreateComponent implements OnInit {
   myForm: FormGroup = new FormGroup({
-    id: new FormControl(null),
     title: new FormControl(null, Validators.required),
     author: new FormControl(null, Validators.required),
     content: new FormControl(null, Validators.required),
@@ -28,20 +27,18 @@ export class BlogCreateComponent implements OnInit {
   submit = true;
   title = '';
   routes?: Route;
-  id = 0;
+  id = '';
 
   ngOnInit(): void {
-    this.id = +this.route?.snapshot?.params['id'];
-    console.log(this.myForm.value);
+    this.id = this.route?.snapshot?.params['id'];
     if (this.id) {
       this.submit = false;
       this.blogService.getOnePost(this.id).subscribe((item) => {
         this.myForm.patchValue({
-          id: item.id,
           title: item.title,
           author: item.author,
           content: item.content,
-          date: item.date,
+          date: item.date.toLocaleDateString,
         });
       });
     }

@@ -2,10 +2,6 @@
   <h1>{{ submit ? "Create a new Post" : "Edit Existing Post" }}</h1>
   <form [formGroup]="myForm" (ngSubmit)="submitForm()">
     <label
-      >Id:
-      <input value="99" formControlName="id" type="number" />
-    </label>
-    <label
       >Title:
       <input formControlName="title" type="text" />
     </label>
