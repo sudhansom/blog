@@ -9,6 +9,23 @@
     h1 {
       font-size: 48px;
       text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      .create {
+        font-size: 18px;
+        border: 1px solid green;
+        border-radius: 6px;
+        padding: 6px 12px;
+        color: green;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.4s ease-in-out;
+        &:hover {
+          background: rgb(206, 238, 206);
+        }
+      }
     }
     .all-posts {
       list-style-type: none;

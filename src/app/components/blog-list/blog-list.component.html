@@ -1,5 +1,8 @@
 <div class="container">
-  <h1>Welcome to my Blog Posts:</h1>
+  <h1>
+    Welcome to my Blog Posts:
+    <a class="create" routerLink="/create">Create New</a>
+  </h1>
   <ul class="all-posts" *ngIf="allPosts$ | async as allPosts">
     <li
       class="all-posts__post"
