@@ -8,7 +8,7 @@ import { BlogRaw } from '../models/blog.model';
   providedIn: 'root',
 })
 export class BlogService {
-  //apiUrl = 'http://localhost:3001/api/posts';
+  //apiUrl = 'http://localhost:3001/api/posts'; // npm run server (json-server);
   apiUrl = 'https://blog-posts-production-bf0f.up.railway.app/api/posts';
 
   constructor(private _http: HttpClient) {}
