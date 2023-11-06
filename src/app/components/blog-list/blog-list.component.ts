@@ -35,4 +35,9 @@ export class BlogListComponent implements OnInit {
     this.authService.loggedIn();
     this.isLoggedIn = true;
   }
+  alertMessage(msg: string) {
+    if (!this.isLoggedIn) {
+      alert('you need to login to ' + msg);
+    }
+  }
 }

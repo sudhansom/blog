@@ -1,7 +1,9 @@
 <div class="container">
   <h1>
     Welcome to my Blog Posts:
-    <a class="create" routerLink="/create">Create New</a>
+    <a class="create" routerLink="/create" (click)="alertMessage('create')"
+      >Create New</a
+    >
     <div class="status">
       <button
         *ngIf="!isLoggedIn"
@@ -21,6 +23,7 @@
       class="all-posts__post"
       *ngFor="let post of allPosts; let i = index"
       routerLink="{{ '/detail/' + post.id }}"
+      (click)="alertMessage('see detail')"
     >
       <p class="header">{{ post.title }}</p>
       <p class="content">{{ post.content }}</p>
