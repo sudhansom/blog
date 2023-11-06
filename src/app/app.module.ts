@@ -10,6 +10,8 @@ import { BlogDetailComponent } from './components/blog-detail/blog-detail.compon
 import { BlogCreateComponent } from './components/blog-create/blog-create.component';
 import { BlogEditComponent } from './components/blog-edit/blog-edit.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './services/auth-guard.service';
+import { AuthService } from './services/auth.service';
 
 const appRoutes: Routes = [
   {
@@ -18,14 +20,17 @@ const appRoutes: Routes = [
   },
   {
     path: 'create',
+    canActivate: [AuthGuard],
     component: BlogCreateComponent,
   },
   {
     path: 'create/:id',
+    canActivate: [AuthGuard],
     component: BlogCreateComponent,
   },
   {
     path: 'detail/:id',
+    canActivate: [AuthGuard],
     component: BlogDetailComponent,
   },
   {
@@ -49,7 +54,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -2,6 +2,19 @@
   <h1>
     Welcome to my Blog Posts:
     <a class="create" routerLink="/create">Create New</a>
+    <div class="status">
+      <button
+        *ngIf="!isLoggedIn"
+        type="button"
+        (click)="logIn()"
+        title="login to take actions"
+      >
+        Login
+      </button>
+      <button *ngIf="isLoggedIn" type="button" (click)="logOut()">
+        LogOut
+      </button>
+    </div>
   </h1>
   <ul class="all-posts" *ngIf="allPosts$ | async as allPosts">
     <li
