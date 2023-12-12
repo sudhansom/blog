@@ -4,13 +4,15 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { BlogRaw } from 'src/app/models/blog.model';
 import { BlogService } from 'src/app/services/blog.service';
+import { CanComponentDeactivate } from './can-deactivate-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-blog-create',
   templateUrl: './blog-create.component.html',
   styleUrls: ['./blog-create.component.scss'],
 })
-export class BlogCreateComponent implements OnInit {
+export class BlogCreateComponent implements OnInit, CanComponentDeactivate {
   myForm: FormGroup = new FormGroup({
     title: new FormControl(null, Validators.required),
     author: new FormControl(null, Validators.required),
@@ -47,12 +49,15 @@ export class BlogCreateComponent implements OnInit {
   submitForm() {
     if (this.submit) {
       this.blogService.createPost(this.myForm.value).subscribe((res) => {
-        this.router?.navigate(['/']);
+        this.router?.navigate(['../', { relativeTo: this.route }]);
       });
     } else {
       this.blogService.editPost(this.myForm.value, this.id).subscribe((res) => {
-        this.router?.navigate(['/']);
+        this.router?.navigate(['/detail', this.id]);
       });
     }
+  }
+  canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
+    return confirm('Are you sure?');
   }
 }

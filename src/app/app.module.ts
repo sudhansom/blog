@@ -12,6 +12,7 @@ import { BlogEditComponent } from './components/blog-edit/blog-edit.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
+import { CanDeactivateGuard } from './components/blog-create/can-deactivate-guard.service';
 
 const appRoutes: Routes = [
   {
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
   {
     path: 'edit',
     component: BlogEditComponent,
+    canDeactivate: [CanDeactivateGuard],
   },
 ];
 
@@ -54,7 +56,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [AuthGuard, AuthService],
+  providers: [AuthGuard, AuthService, CanDeactivateGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
