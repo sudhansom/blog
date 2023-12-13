@@ -27,6 +27,7 @@ const appRoutes: Routes = [
   {
     path: 'create/:id',
     canActivate: [AuthGuard],
+    canDeactivate: [CanDeactivateGuard],
     component: BlogCreateComponent,
   },
   {
