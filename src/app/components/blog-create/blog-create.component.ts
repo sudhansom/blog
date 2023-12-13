@@ -30,6 +30,7 @@ export class BlogCreateComponent implements OnInit, CanComponentDeactivate {
   title = '';
   routes?: Route;
   id = '';
+  formSubmitted = false;
 
   ngOnInit(): void {
     this.id = this.route?.snapshot?.params['id'];
@@ -49,16 +50,19 @@ export class BlogCreateComponent implements OnInit, CanComponentDeactivate {
   submitForm() {
     if (this.submit) {
       this.blogService.createPost(this.myForm.value).subscribe((res) => {
-        this.router?.navigate(['../', { relativeTo: this.route }]);
+        this.formSubmitted = true;
+        this.router?.navigate(['/']);
       });
     } else {
       this.blogService.editPost(this.myForm.value, this.id).subscribe((res) => {
+        this.formSubmitted = true;
         this.router?.navigate(['/detail', this.id]);
       });
     }
+
   }
   canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
-    if(this.myForm.dirty){
+    if(this.myForm.dirty && !this.formSubmitted){
       return confirm('Are you sure?');
     }
     return true;
