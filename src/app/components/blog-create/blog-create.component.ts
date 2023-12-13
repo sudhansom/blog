@@ -58,6 +58,9 @@ export class BlogCreateComponent implements OnInit, CanComponentDeactivate {
     }
   }
   canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
-    return confirm('Are you sure?');
+    if(this.myForm.dirty){
+      return confirm('Are you sure?');
+    }
+    return true;
   }
 }
